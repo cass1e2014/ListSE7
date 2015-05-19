@@ -24,26 +24,26 @@ public class PartitionList {
 	}
 
 	public ListNode partition(ListNode head, int x) {
-		if (head == null || head.next == null) {
-			return head;
+		if(head == null){
+			return null;
 		}
-		ListNode dummy = new ListNode(0);
-		ListNode preRight = new ListNode(0);//用preRight指向等于x或者比x大的数，tailRight是移动preRight那条链的指针
-		dummy.next = head;
-		head = dummy;//head是比x小大那串链的指针
-		ListNode tailRight = preRight;
-		while(head.next != null){
-			if(head.next.val < x){
-				head = head.next;
+		
+		ListNode leftDummy = new ListNode(0);
+		ListNode rightDummy = new ListNode(0);
+		ListNode left = leftDummy, right = leftDummy;
+		while(head != null){
+			if(head.val < x){
+				left.next = head;
+				left = head;
 			}else{
-				tailRight.next = head.next;
-				head.next = head.next.next;
-				tailRight = tailRight.next;
-				tailRight.next = null;
+				right.next = head;
+				right = head;
 			}
+			head = head.next;
 		}
-		head.next = preRight.next;//最后把两串链连起来
-		return dummy.next;
+		right.next = null;
+		left.next = rightDummy.next;
+		return leftDummy.next;
 	}
 	
 	public static void main(String[] args){
@@ -65,8 +65,8 @@ public class PartitionList {
 	
 	public static void printList(ListNode node){
 		if(node != null){
-			System.out.println(node.val + " ");
-			while(node.next != null){
+//			System.out.println(node.val + " ");
+			while(node!= null){
 				System.out.println(node.val + " ");
 				node = node.next;
 			}

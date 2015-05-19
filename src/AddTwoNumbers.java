@@ -42,7 +42,7 @@ public class AddTwoNumbers {
 		}
 		
 		//当l1和l2都过完，还有进位没有处理的时候
-		while(carry != 0){
+		if(carry != 0){
 			tail.next = new ListNode(carry);
 		}
 		

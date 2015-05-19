@@ -43,4 +43,43 @@ public class MergeKSortedLists {
 			return left.val - right.val;
 		}
 	};
+
+	// 如果input的lists是以array的形式：：
+	public ListNode mergeKLists2(ListNode[] lists) {
+		if (lists == null || lists.length == 0) {
+			return null;
+		}
+		Queue<ListNode> heap = new PriorityQueue<ListNode>(lists.length,
+				listNodeComparator);
+		for (int i = 0; i < lists.length; i++) {
+			// 不要忘记这个null check
+			if (lists[i] != null) {
+				heap.add(lists[i]);
+			}
+		}
+
+		ListNode dummy = new ListNode(0);
+		ListNode tail = dummy;
+
+		while (!heap.isEmpty()) {
+			ListNode head = heap.poll();
+			tail.next = head;
+			tail = head;
+			if (head.next != null) {
+				heap.add(head.next);
+			}
+		}
+		return dummy.next;
+	}
+
+	public Comparator<ListNode> listNodeComparator = new Comparator<ListNode>() {
+		public int compare(ListNode left, ListNode right) {
+			if (left == null) {
+				return 1;
+			} else if (right == null) {
+				return -1;
+			}
+			return left.val - right.val;
+		}
+	};
 }
