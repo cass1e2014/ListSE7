@@ -64,8 +64,8 @@ public class ReverseNodesInKGroup {
 				head = curHead;
 			} else {
 				preTail.next = curHead; // 需要把反转后的头接上之前的尾，不用管反转后的尾，下次会被考虑
-				preTail = curTail;
 			}
+			preTail = curTail;
 		}
 		// 当需要反转当全部反转完后，把最后当尾巴连上还剩下的node
 		curTail.next = cur;
