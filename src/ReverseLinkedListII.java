@@ -32,7 +32,6 @@ public class ReverseLinkedListII {
 		for (int i = 1; i < m; i++) {
 			head = head.next;// 把head移到m的前一位
 		}
-		ListNode pre = head;//pre指针是为了连反转后n所对应的node
 		ListNode mNode = head.next;// 在m处的一个指针，不移动，为方便之后反转后连到尾部
 		ListNode nNode = head.next;// 随reverse移动
 		ListNode post = mNode.next;//post指针是为了接着反转后m对应的node
@@ -45,7 +44,7 @@ public class ReverseLinkedListII {
 			post = temp;
 		}
 		mNode.next = post;
-		pre.next = nNode;
+		head.next = nNode;
 
 		return dummy.next;
 	}
