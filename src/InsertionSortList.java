@@ -30,7 +30,7 @@ public class InsertionSortList {
 				while(pre.next.val < valueToStore.val){
 					pre = pre.next; //这种情况下不需要insert
 				}
-				ListNode temp = pre.next;
+				ListNode temp = pre.next; //需要temp来存，如果valueToStore需要换到特别前面（dummy->3->4->1->...)
 				pre.next = valueToStore;
 				curr.next = valueToStore.next;
 				valueToStore.next = temp;

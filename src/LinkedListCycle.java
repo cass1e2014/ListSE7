@@ -4,6 +4,8 @@
  * solve it without using extra space?
  * slow和fast两个指针，slow走一步，fast走两步，如果slow和fast相遇则有环
  * 
+ * Time O(N), Space O(1)
+ * 
  * @author cassie9082
  * 
  */
@@ -18,20 +20,18 @@ public class LinkedListCycle {
 		}
 	}
 
-	public boolean hasCycle(ListNode head) {
-		if (head == null) {
-			return false;
-		}
-		ListNode slow = head;
-		ListNode fast = head.next;
-
-		while (fast != null && fast.next != null) {
-			slow = slow.next;
-			fast = fast.next.next;
-			if (slow == fast) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean hasCycle(ListNode head) {
+        if(head == null) return false;
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            while(slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
 }

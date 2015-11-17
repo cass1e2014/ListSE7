@@ -23,44 +23,40 @@ public class CopyListWithRandomPointer {
 	 * @param head
 	 * @return
 	 */
-	public RandomListNode copyRandomList(RandomListNode head) {
-		if (head == null) {
-			return null;
-		}
-		copyNext(head);
-		copyRandom(head);
-		return splitList(head);
-	}
-
-	public void copyNext(RandomListNode head) {
-		while (head != null) {
-			RandomListNode newNode = new RandomListNode(head.label);
-			newNode.next = head.next;
-			newNode.random = head.random;
-			head.next = newNode;
-			head = head.next.next;
-		}
-	}
-
-	public void copyRandom(RandomListNode head) {
-		while (head != null) {
-			if (head.next.random != null) {
-				head.next.random = head.random.next;
-			}
-			head = head.next.next;
-		}
-	}
-
-	public RandomListNode splitList(RandomListNode head) {
-		RandomListNode newHead = head.next;
-		while (head != null) {
-			RandomListNode temp = head.next;
-			head.next = temp.next;
-			head = head.next;
-			if (temp.next != null) {
-				temp.next = temp.next.next;
-			}
-		}
-		return newHead;
-	}
+	 public RandomListNode copyRandomList(RandomListNode head) {
+	        if(head == null)    return null;
+	        copyNext(head);
+	        copyRandom(head);
+	        return splitList(head);
+	    }
+	    
+	    //create a copy of each node and insert them in between two original nodes
+	    public void copyNext(RandomListNode head){
+	        while(head != null){
+	            RandomListNode newNode = new RandomListNode(head.label);
+	            newNode.next = head.next;
+	            head.next = newNode;
+	            head = head.next.next;
+	        }
+	    }
+	    
+	    //Assign random pointer of each node copy
+	    public void copyRandom(RandomListNode head){
+	        while(head != null){
+	            head.next.random = head.random != null ? head.random.next : null;
+	            head = head.next.next;
+	        }
+	    }
+	    
+	    //Restore the input to its original configuration
+	    public RandomListNode splitList(RandomListNode head){
+	        RandomListNode newHead = head.next;
+	        while(head != null){
+	            RandomListNode tmp = head.next;
+	            head.next = tmp.next;
+	            head = head.next;
+	            tmp.next = head != null ? head.next : null;
+	        }
+	        return newHead;
+	    }
 }

@@ -9,6 +9,8 @@ import java.util.List;
  * 
  * For example, Given 1->4->3->2->5->2 and x = 3, return 1->2->2->4->3->5.
  * 
+ * (quick sort)
+ * 
  * @author cassie9082
  * 
  */
@@ -23,9 +25,10 @@ public class PartitionList {
 		}
 	}
 
-	public ListNode partition(ListNode head, int x) {
+	//space O(n)
+	public ListNode partition1(ListNode head, int x) {
 		if(head == null){
-			return null;
+			return head;
 		}
 		
 		ListNode leftDummy = new ListNode(0);
@@ -46,6 +49,33 @@ public class PartitionList {
 		return leftDummy.next;
 	}
 	
+	public ListNode partition2(ListNode head, int x){
+		if(head == null){
+			return head;
+		}
+		ListNode dummy = new ListNode(0);
+		dummy.next = head;
+		ListNode last = dummy;
+		//找到插入的位置
+		while(last.next != null && last.next.val < x){
+			last = last.next;
+		}
+		ListNode curr = last;
+		while(curr.next != null){
+			//找到需要往前移的node
+			if(curr.next.val < x){
+				ListNode nt = curr.next.next;
+				curr.next.next = last.next;
+				last.next = curr.next;
+				curr.next = nt;
+				last = last.next;
+			}else{
+				curr = curr.next;
+			}
+		}
+		return dummy.next;
+	}
+	
 	public static void main(String[] args){
         PartitionList pl = new PartitionList();
 		ListNode n1 = pl.new ListNode(2);
@@ -59,7 +89,7 @@ public class PartitionList {
         n3.next = n4;
         n4.next = n5;
         n5.next = n6;
-        n1 = pl.partition(n1, 4);
+        n1 = pl.partition1(n1, 4);
         printList(n1);
 	}
 	

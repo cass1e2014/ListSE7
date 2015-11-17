@@ -14,41 +14,36 @@ public class RotateList {
 		}
 	}
 
-	public ListNode rotateRight(ListNode head, int n) {
-		if (head == null) {
-			return head;
-		}
 
-		int length = getLength(head);
-		n = n % length;
-
-		ListNode dummy = new ListNode(0);
-		dummy.next = head;
-		head = dummy;
-		
-		//需要tail和head两个指针来确定要rotatelist的位置以及方便链接成一个新的list
-		ListNode tail = head;
-		for (int i = 0; i < n; i++) {
-			head = head.next;
-		}
-		while (head.next != null) {
-			head = head.next;
-			tail = tail.next;
-		}
-		tail.next = dummy.next;//与九章给的答案有出入？？？？？
-		dummy.next = head.next;
-		head.next = null;//??????
-		return dummy.next;
-
-	}
-
-	public int getLength(ListNode head) {
-		int length = 0;
-		while (head != null) {
-			head = head.next;
-			length++;
-		}
-		return length;
-	}
-
+	public ListNode rotateRight(ListNode head, int k) {
+        if(head == null || head.next == null || k <= 0){
+            return head;
+        }
+        
+        ListNode prev = head;
+        ListNode curr = head;
+        
+        int len = 0;
+        while(head != null){
+            head = head.next;
+            len ++;
+        }
+        k = k % len;
+        head = curr;//head重新指回开头
+        
+        while(curr.next != head || k > 0){
+            if(k > 0){
+                k --;
+            }else{
+                prev = prev.next;
+            }
+            curr = curr.next;
+            if(curr.next == null){
+                curr.next = head;
+            }
+        }
+        ListNode dummy = prev.next;
+        prev.next = null;
+        return dummy;
+    }
 }

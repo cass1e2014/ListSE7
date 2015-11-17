@@ -1,6 +1,8 @@
 /*
  * 给出一个链表1->2->3->null，这个翻转后的链表为3->2->1->null
  * 在原地一次翻转完成
+ * 
+ * Time O(n), Space O(1)
  */
 public class ReverseLinkedList {
 	public ListNode reverse(ListNode head) {
