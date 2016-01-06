@@ -3,8 +3,7 @@
  * cycle, return null. Follow up: Can you solve it without using extra space?
  * 
  * slow 和 fast 同时出发，fast 比 slow 快一倍；当 slow 和 fast 相遇时，启动另一个 slow2 以与 slow
- * 相同的速度从头出发，当 slow2 与 slow 相遇，则是环口。slow 和 fast 同时出发，fast 比 slow 快一倍；当 slow 和
- * fast 相遇时，启动另一个 slow2 以与 slow 相同的速度从头出发，当 slow2 与 slow 相遇，则是环口。
+ * 相同的速度从头出发，当 slow2 与 slow 相遇，则是环口。
  * 
  * 
  * @author cassie9082

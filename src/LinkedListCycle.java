@@ -28,7 +28,7 @@ public class LinkedListCycle {
         while(fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
-            while(slow == fast){
+            if(slow == fast){
                 return true;
             }
         }
